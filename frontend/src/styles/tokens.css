@@ -1,0 +1,128 @@
+/*
+ * Design tokens – wp-go-desktop
+ *
+ * Two layers:
+ *  1. --aui-*  : the affectUI theming hooks. Every component in src/components/ui reads these with a built-in fallback
+ *                (the library's exact look). They are intentionally LEFT UNSET so each component keeps its stock values.
+ *                Uncomment a line to re-theme every component at once (see doc/DESIGN_SYSTEM.md §3).
+ *  2. --app-*  : the app shell (sidebar, editor, terminal, status bar) – values taken from the same affectUI palette.
+ *
+ * Dark mode: set class="dark" or data-theme="dark" on <html>. Same switch the components use.
+ */
+
+:root {
+  /* ---- 1. affectUI hooks (unset = stock look) ---- */
+  /* --aui-font: "Inter", "InterVariable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; */
+  /* --aui-font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; */
+  /* --aui-ink: #171717; */
+  /* --aui-muted: #737373; */
+  /* --aui-placeholder: #a3a3a3; */
+  /* --aui-surface: #ffffff; */
+  /* --aui-overlay: #ffffff; */
+  /* --aui-subtle: #f0f0f0; */
+  /* --aui-border: #ececec; */
+  /* --aui-border-strong: #d4d4d8; */
+  /* --aui-focus: rgba(0, 96, 226, 0.7); */
+  /* --aui-blue: #0190fe; */
+  /* --aui-red: #f04438; */
+  /* --aui-danger: #d92d20; */
+  /* --aui-success: #1e8a4f; */
+  /* --aui-warning: #b25e00; */
+  /* --aui-info: #2456d6; */
+  /* --aui-radius-sm: 5px; */
+  /* --aui-radius: 10px; */
+  /* --aui-radius-lg: 10px; */
+  /* --aui-ease: cubic-bezier(0.22, 1, 0.36, 1); */
+
+  /* ---- 2. App shell ---- */
+  --app-font: "Inter", "InterVariable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --app-font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --app-bg: #fafafa;            /* window background, title bar area */
+  --app-sidebar: #fafafa;       /* file tree */
+  --app-editor: #ffffff;        /* editor + markdown preview surface */
+  --app-panel: #ffffff;         /* bottom terminal panel */
+  --app-statusbar: #fafafa;
+  --app-ink: #171717;
+  --app-text: #404040;
+  --app-muted: #737373;
+  --app-faint: #a3a3a3;
+  --app-line: #ececec;          /* hairlines between regions */
+  --app-line-strong: #e5e5e5;
+  --app-hover: #f4f4f5;         /* row hover (same as Dropdown Menu glow) */
+  --app-selected: #f0f0f0;
+  --app-accent: #0190fe;
+  --app-danger: #d92d20;
+  --app-success: #1e8a4f;
+  --app-warning: #b25e00;
+  --app-focus: rgba(0, 96, 226, 0.7);
+  --app-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Type scale (from the components: 11 kbd · 12 headings/meta · 12.5 descriptions · 13/13.5 body · 14 inputs · 15 large) */
+  --app-fs-xs: 11px;
+  --app-fs-sm: 12px;
+  --app-fs-body: 13.5px;
+  --app-fs-md: 14px;
+  --app-fs-lg: 15px;
+  --app-fs-code: 13px;
+  --app-lh-code: 20px;
+
+  /* Spacing – 4px grid; radii follow the library */
+  --app-space-1: 4px;
+  --app-space-2: 8px;
+  --app-space-3: 12px;
+  --app-space-4: 16px;
+  --app-space-5: 20px;
+  --app-space-6: 24px;
+  --app-radius-sm: 6px;
+  --app-radius: 10px;
+  --app-radius-lg: 14px;
+
+  /* Layout */
+  --app-titlebar-h: 38px;       /* macOS: room for the traffic lights (Wails TitleBarHiddenInset) */
+  --app-statusbar-h: 24px;
+  --app-sidebar-min: 180px;
+
+  color-scheme: light;
+}
+
+:root:where(.dark, [data-theme="dark"]) {
+  --app-bg: #111113;
+  --app-sidebar: #111113;
+  --app-editor: #161618;
+  --app-panel: #161618;
+  --app-statusbar: #111113;
+  --app-ink: #ededed;
+  --app-text: #e4e4e7;
+  --app-muted: #8f8f8f;
+  --app-faint: #5c5c63;
+  --app-line: #2a2a2e;
+  --app-line-strong: #34343a;
+  --app-hover: #1d1d20;
+  --app-selected: #26262a;
+  --app-accent: #4fb0fe;
+  --app-danger: #ff8a7a;
+  --app-success: #5fc88a;
+  --app-warning: #ffb35c;
+  --app-focus: rgba(77, 141, 255, 0.8);
+
+  color-scheme: dark;
+}
+
+/* Base */
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: var(--app-bg);
+  color: var(--app-ink);
+  font-family: var(--app-font);
+  font-size: var(--app-fs-body);
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;            /* desktop feel; editor/preview/terminal opt back in */
+  overflow: hidden;
+}
+::selection { background: color-mix(in srgb, var(--app-accent) 22%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}

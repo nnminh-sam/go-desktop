@@ -1,0 +1,30 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Go / Wails
+/build/bin/
+*.exe
+*.test
+*.out
+/vendor/
+
+# Frontend
+node_modules/
+frontend/dist/
+frontend/wailsjs/
+*.tsbuildinfo
+.vite/
+
+# Logs and local env
+*.log
+.env
+.env.*
+!.env.example
+
+# Python helpers
+__pycache__/
